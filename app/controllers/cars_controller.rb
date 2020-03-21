@@ -16,6 +16,30 @@ class CarsController < ApplicationController
     redirect_if_try_to_spoof
   end
 
+  def show
+    redirect_if_try_to_spoof
+    find_car_or_redirect
+  end
+
+  def edit
+    redirect_if_try_to_spoof
+    find_car_or_redirect
+  end
+
+  def update
+    redirect_if_try_to_spoof
+    find_car_or_redirect
+    @car.update(car_params)
+    @car.errors.any? ? (render :edit) : (redirect_to [current_user, @car])
+  end
+
+  def destroy
+    redirect_if_try_to_spoof
+    find_car_or_redirect
+    @car.destroy
+    redirect_to current_user
+  end
+
   private
 
   def find_car_or_redirect
