@@ -1,8 +1,8 @@
 <%= link_to  user_car_path(current_user, @car), class: "green lighten-1 hoverable waves-effect waves-light btn left" do %>
-  <i class="fas fa-store"></i> Back to Car
+  <i class="fas fa-backward"></i> Back to Car
 <% end %> <br><br><br>
 <%= link_to new_user_car_dealership_path(current_user, @car), class: "green lighten-1 hoverable waves-effect waves-light btn" do %>
-  <i class="far fa-trash-alt"></i> Add Dealership
+  <i class="fas fa-store"></i> Add Dealership
 <% end %>
 <% if @car.dealerships.size > 0 %>
 <h3><%=@car.year%> <%=@car.manufacturer.name%> <%=@car.model%> Sold at the Following Dealerhsips</h3>
