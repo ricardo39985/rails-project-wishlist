@@ -1,0 +1,43 @@
+<% if @deal.errors.any? %>
+  <ul>
+    <% @deal.errors.full_messages.each do |error| %>
+      <li class="red-text center"><strong><%=error%></strong></li>
+    <% end %>
+  </ul>
+  <hr>
+<% end %>
+ <div class="row valign-wrapper">
+  <div class="col s12 ">
+   <div class="card medium">
+     <div class="card-content grey-text darken-3">
+      <%= form_for [current_user, @car, @deal] do |f| %>
+        <p>
+          <b>New Manufacturer</b><br>
+          <div class = "field">
+          <%=f.label :name%>
+          <%= f.text_field :name%>
+          </div><br>
+
+          <div class = "field">
+          <%=f.label :location%>
+          <%= f.text_field :location%>
+          </div><br>
+    
+        </p>
+        <p>
+    <div class="card-action">
+          <%= button_tag class: "green lighten-2 hoverable waves-effect waves-light btn center" do %>
+            <strong>
+            <% if @deal.id %>
+              <i class="fas fa-pen-fancy"></i>   Update
+              <% else %>
+              <i class="fas fa-plus"></i>  Create 
+            <% end %>
+            </strong>
+          <% end %>
+    </div>
+        </p>
+      <% end %>
+    </div>
+  </div>
+</div>
