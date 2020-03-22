@@ -17,7 +17,7 @@ end
   make_model = Faker::Vehicle.make_and_model.split(' ')
   Manufacturer.find_or_create_by(name: make_model[0]) do |m|
     m.ceo = Faker::Name.name_with_middle
-    m.revenue = '$' + Faker::Number.decimal(l_digits: 2).to_s + 'B'
+    m.revenue = Faker::Number.decimal(l_digits: 2)
   end
 end
 
