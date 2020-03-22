@@ -50,7 +50,7 @@ Rails 5+
 
 
 
-## 📋 Specifications for the Rails Assessment <a name = "requirements"></a>
+## 📋 Specification <a name = "requirements"></a>
 
 Specs:
 - [x] Using Ruby on Rails for the project
