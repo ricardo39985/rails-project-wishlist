@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="" rel="noopener">
+  <a href="https://github.com/ricardo39985/rails-project-wishlist#about" rel="noopener">
  <img width=200px height=200px src="https://www.freepnglogos.com/uploads/cleveland-auto-show-car-logo-png-25.png" alt="Car logo"></a>
 </p>
 
@@ -25,7 +25,7 @@
 - [About](#about)
 - [Getting Started](#getting_started)
 - [Authors](#authors)
-- [Specifications][#requirements]
+- [Specifications](#requirements)
 
 ## 🧐 About <a name = "about"></a>
 
