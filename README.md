@@ -50,7 +50,7 @@ Rails 5+
 
 
 
-## Specifications for the Rails Assessment <a name = "requirements"></a>
+## 📋 Specifications for the Rails Assessment <a name = "requirements"></a>
 
 Specs:
 - [x] Using Ruby on Rails for the project
@@ -77,7 +77,7 @@ Confirm:
 
 
 
-## ✍️ License <a name = "license"></a>
+## 📜 License <a name = "license"></a>
 
 Copyright 2020 Ricardo Persaud
 
