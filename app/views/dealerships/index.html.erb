@@ -1,2 +1,35 @@
-<h1>Dealerships#index</h1>
-<p>Find me in app/views/dealerships/index.html.erb</p>
+<% if @car.dealerships.size > 0 %>
+  <% @car.dealerships.each do |deal| %>
+    <div class="">
+        <div class="row valign-wrapper">
+          <div class="col s12 ">
+            <a href="<%=user_car_path(current_user, @car)%>">
+              <div class="card small hoverable">
+                <div class="card-content grey-text darken-3">
+                  <h4 class="card-title"><%=deal.name%></h4>
+                  <h4 class="card-title"><%=deal.location%></h4>
+                  <hr>
+
+              </div>
+            </a>
+              <div class="card-action">
+                <%= link_to  edit_user_car_path(current_user, @car), class: "orange lighten- 3 hoverable waves-effect waves-light btn left" do %>
+                  <i class="far fa-edit"></i> Edit
+                <% end %>
+                <%= link_to user_car_path(current_user, @car), method: :delete, class: "red lighten-2 hoverable waves-effect waves-light btn right" do %>
+                  <i class="far fa-trash-alt"></i> Delete
+                <% end %>            
+              </div>
+            </div>
+          </div>
+        </div>
+
+    </div>
+  <% end %>
+<% else %>
+<h3>No dealerships found</h3>
+<%= link_to new_user_car_dealership_path(current_user, @car), class: "green lighten-1 hoverable waves-effect waves-light btn" do %>
+  <i class="far fa-trash-alt"></i> Add Dealership
+<% end %>
+
+<% end %>
