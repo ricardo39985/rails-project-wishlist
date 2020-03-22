@@ -1,29 +1,21 @@
+<%= link_to  user_car_path(current_user, @car), class: "green lighten- 3 hoverable waves-effect waves-light btn left" do %>
+  <i class="fas fa-backward"></i> Back to Car
+<% end %> <br><br><br>
 <% if @car.dealerships.size > 0 %>
+<h3><%=@car.year%> <%=@car.manufacturer.name%> <%=@car.model%> Sold at the Following Dealerhsips</h3>
   <% @car.dealerships.each do |deal| %>
     <div class="">
         <div class="row valign-wrapper">
           <div class="col s12 ">
-            <a href="<%=user_car_path(current_user, @car)%>">
-              <div class="card small hoverable">
+              <div class="card small ">
                 <div class="card-content grey-text darken-3">
                   <h4 class="card-title"><%=deal.name%></h4>
                   <h4 class="card-title"><%=deal.location%></h4>
                   <hr>
-
-              </div>
-            </a>
-              <div class="card-action">
-                <%= link_to  edit_user_car_path(current_user, @car), class: "orange lighten- 3 hoverable waves-effect waves-light btn left" do %>
-                  <i class="far fa-edit"></i> Edit
-                <% end %>
-                <%= link_to user_car_path(current_user, @car), method: :delete, class: "red lighten-2 hoverable waves-effect waves-light btn right" do %>
-                  <i class="far fa-trash-alt"></i> Delete
-                <% end %>            
               </div>
             </div>
           </div>
         </div>
-
     </div>
   <% end %>
 <% else %>
