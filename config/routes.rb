@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # root to: 'home#index'
   resources :users, only: %i[show index] do
     resources :cars do
-      resources :dealerships, only: %i[index show]
+      resources :dealerships, only: %i[index new create]
       resources :manufacturers, only: [:show]
     end
   end
