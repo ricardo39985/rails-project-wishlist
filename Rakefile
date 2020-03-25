@@ -4,7 +4,3 @@
 require_relative 'config/application'
 
 Rails.application.load_tasks
-
-task :console do
-    rake db:migrate && rake db:seed
-end
