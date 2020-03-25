@@ -5,7 +5,7 @@
 #   gem 'sqlit
 default: &default
   adapter: postgresql
-  #Uncomment the line below an comment out the line above to use sqlite instead
+  #Uncomment the line below and comment out the line above to use sqlite instead, then ensure sqlite is uncommented in the gem file.
   # adapter: sqlite3
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
@@ -13,7 +13,7 @@ default: &default
 development:
   <<: *default
   database: db/development
-  #Uncomment the line below an comment out the line above to use sqlite instead
+  #Uncomment the line below and comment out the line above to use sqlite instead, then ensure sqlite is uncommented in the gem file.
   # database: db/development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
@@ -22,11 +22,11 @@ development:
 test:
   <<: *default
   database: db/test
-  #Uncomment the line below an comment out the line above to use sqlite instead
+  #Uncomment the line below and comment out the line above to use sqlite instead, then ensure sqlite is uncommented in the gem file.
   # database: db/test.sqlite3
 
 production:
   <<: *default
   database: db/production
-  #Uncomment the line below an comment out the line above to use sqlite instead
+  #Uncomment the line below and comment out the line above to use sqlite instead, then ensure sqlite is uncommented in the gem file.
   # database: db/production.sqlite3
