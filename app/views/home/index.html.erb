@@ -5,9 +5,70 @@ It provides authentication through Google, built with restfulness in mind and al
  <div class="col s12 ">
   <div class="card large">
     <div class="card-content grey-text darken-3">
-      <iframe width="1080" height="460" src="https://www.youtube.com/embed/yXBjwxUChzY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+      <iframe width="800" height="460" src="https://www.youtube.com/embed/yXBjwxUChzY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
       </iframe>
+      
     </div>
   </div>
  </div>
 </div>
+<div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #999999; font-style: italic">Sample Code Car Controller</span>
+
+<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">CarsController</span> <span style="color: #d0d0d0">&lt;</span> <span style="color: #40ffff">ApplicationController</span>
+  <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">new</span>
+    <span style="color: #d0d0d0">redirect_if_try_to_spoof</span>
+    <span style="color: #40ffff">@car</span> <span style="color: #d0d0d0">=</span> <span style="color: #40ffff">Car</span><span style="color: #d0d0d0">.new</span>
+  <span style="color: #6ab825; font-weight: bold">end</span>
+
+  <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">create</span>
+    <span style="color: #d0d0d0">redirect_if_try_to_spoof</span>
+    <span style="color: #40ffff">@car</span> <span style="color: #d0d0d0">=</span> <span style="color: #40ffff">Car</span><span style="color: #d0d0d0">.new(car_params)</span>
+    <span style="color: #40ffff">@car</span><span style="color: #d0d0d0">.save</span> <span style="color: #d0d0d0">?</span> <span style="color: #d0d0d0">(redirect_to</span> <span style="color: #d0d0d0">user_car_path(current_user,</span> <span style="color: #40ffff">@car</span><span style="color: #d0d0d0">))</span> <span style="color: #d0d0d0">:</span> <span style="color: #d0d0d0">(render</span> <span style="color: #ed9d13">:new</span><span style="color: #d0d0d0">)</span>
+  <span style="color: #6ab825; font-weight: bold">end</span>
+
+  <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">index</span>
+    <span style="color: #d0d0d0">redirect_if_try_to_spoof</span>
+  <span style="color: #6ab825; font-weight: bold">end</span>
+
+  <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">show</span>
+    <span style="color: #d0d0d0">redirect_if_try_to_spoof</span>
+    <span style="color: #d0d0d0">find_car_or_redirect</span>
+  <span style="color: #6ab825; font-weight: bold">end</span>
+
+  <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">edit</span>
+    <span style="color: #d0d0d0">redirect_if_try_to_spoof</span>
+    <span style="color: #d0d0d0">find_car_or_redirect</span>
+  <span style="color: #6ab825; font-weight: bold">end</span>
+
+  <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">update</span>
+    <span style="color: #d0d0d0">redirect_if_try_to_spoof</span>
+    <span style="color: #d0d0d0">find_car_or_redirect</span>
+    <span style="color: #40ffff">@car</span><span style="color: #d0d0d0">.update(car_params)</span>
+    <span style="color: #40ffff">@car</span><span style="color: #d0d0d0">.errors.any?</span> <span style="color: #d0d0d0">?</span> <span style="color: #d0d0d0">(render</span> <span style="color: #ed9d13">:edit</span><span style="color: #d0d0d0">)</span> <span style="color: #d0d0d0">:</span> <span style="color: #d0d0d0">(redirect_to</span> <span style="color: #d0d0d0">[current_user,</span> <span style="color: #40ffff">@car</span><span style="color: #d0d0d0">])</span>
+  <span style="color: #6ab825; font-weight: bold">end</span>
+
+  <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">destroy</span>
+    <span style="color: #d0d0d0">redirect_if_try_to_spoof</span>
+    <span style="color: #d0d0d0">find_car_or_redirect</span>
+    <span style="color: #40ffff">@car</span><span style="color: #d0d0d0">.destroy</span>
+    <span style="color: #d0d0d0">redirect_to</span> <span style="color: #d0d0d0">current_user</span>
+  <span style="color: #6ab825; font-weight: bold">end</span>
+
+  <span style="color: #6ab825">private</span>
+
+  <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">find_car_or_redirect</span>
+    <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #6ab825; font-weight: bold">unless</span> <span style="color: #d0d0d0">user_signed_in?</span>
+
+    <span style="color: #40ffff">@car</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">current_user.cars.find_by(</span><span style="color: #24909d">id</span><span style="color: #d0d0d0">:</span> <span style="color: #d0d0d0">params[</span><span style="color: #ed9d13">:id</span><span style="color: #d0d0d0">])</span>
+    <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #6ab825; font-weight: bold">if</span> <span style="color: #40ffff">@car</span>
+
+    <span style="color: #d0d0d0">flash[</span><span style="color: #ed9d13">:notice</span><span style="color: #d0d0d0">]</span> <span style="color: #d0d0d0">=</span> <span style="color: #ed9d13">&#39;You do not have permission to do that&#39;</span>
+    <span style="color: #d0d0d0">redirect_to</span> <span style="color: #d0d0d0">current_user</span>
+  <span style="color: #6ab825; font-weight: bold">end</span>
+
+  <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">car_params</span>
+    <span style="color: #d0d0d0">params.require(</span><span style="color: #ed9d13">:car</span><span style="color: #d0d0d0">).permit(</span><span style="color: #ed9d13">:model</span><span style="color: #d0d0d0">,</span> <span style="color: #ed9d13">:manufacturer_id</span><span style="color: #d0d0d0">,</span> <span style="color: #ed9d13">:year</span><span style="color: #d0d0d0">,</span> <span style="color: #ed9d13">:user_id</span><span style="color: #d0d0d0">)</span>
+  <span style="color: #6ab825; font-weight: bold">end</span>
+<span style="color: #6ab825; font-weight: bold">end</span>
+</pre></div>
+
