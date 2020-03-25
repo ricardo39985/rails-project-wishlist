@@ -37,7 +37,8 @@ Rails project to demonstrate Restfulness and CRUD actions
 Clone  
 Bundle  
 rake db:migrate  
-rake db:seed (very important!!)   
+# very important!!
+rake db:seed   
 rails s    
 visit  localhost:30001  
 ```
