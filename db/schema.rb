@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2020_03_20_053309) do
 
   create_table "manufacturers", force: :cascade do |t|
     t.string "ceo"
-    t.string "revenue"
+    t.integer "revenue"
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
