@@ -33,13 +33,14 @@
 Rails project to demonstrate Restfulness and CRUD actions
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
-
+```ruby
 Clone  
 Bundle  
 rake db:migrate  
 rake db:seed (very important!!)   
 rails s    
 visit  localhost:30001  
+```
 
 ### Prerequisites
 ```
