@@ -1,18 +1,22 @@
 <p><strong>A simple Car Wishlist rails application to keep a list of cars you like.
-It provides authentication through Google, built with restfulness in mind and allows you to perform CRUD operations.</strong>
+    It provides authentication through Google, built with restfulness in mind and allows you to perform CRUD
+    operations.</strong>
 </p>
 <div class="row valign-wrapper">
-    <div class="col s12 ">
-        <div class="card large">
-            <div class="card-content grey-text darken-3">
-                <iframe width="800" height="460" src="https://www.youtube.com/embed/yXBjwxUChzY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                </iframe>
+  <div class="col s12 ">
+    <div class="card large">
+      <div class="card-content grey-text darken-3 center">
+        <iframe width="1080" height="470" src="https://www.youtube.com/embed/yXBjwxUChzY" frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+        </iframe>
 
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
-<div style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #999999; font-style: italic">Sample Code Car Controller</span>
+<div
+  style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+  <pre style="margin: 0; line-height: 125%"><span style="color: #999999; font-style: italic">Sample Code Car Controller</span>
 
 <span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">CarsController</span> <span style="color: #d0d0d0">&lt;</span> <span style="color: #40ffff">ApplicationController</span>
   <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">new</span>
@@ -70,4 +74,5 @@ It provides authentication through Google, built with restfulness in mind and al
     <span style="color: #d0d0d0">params.require(</span><span style="color: #ed9d13">:car</span><span style="color: #d0d0d0">).permit(</span><span style="color: #ed9d13">:model</span><span style="color: #d0d0d0">,</span> <span style="color: #ed9d13">:manufacturer_id</span><span style="color: #d0d0d0">,</span> <span style="color: #ed9d13">:year</span><span style="color: #d0d0d0">,</span> <span style="color: #ed9d13">:user_id</span><span style="color: #d0d0d0">)</span>
   <span style="color: #6ab825; font-weight: bold">end</span>
 <span style="color: #6ab825; font-weight: bold">end</span>
-</pre></div>
+</pre>
+</div>
