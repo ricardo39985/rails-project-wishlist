@@ -9,70 +9,192 @@
         <iframe width="1080" height="470" src="https://www.youtube.com/embed/yXBjwxUChzY" frameborder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
         </iframe>
-
       </div>
     </div>
   </div>
 </div>
-<div
-  style="background: #202020; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-  <pre style="margin: 0; line-height: 125%"><span style="color: #999999; font-style: italic">Sample Code Car Controller</span>
+<div>
+  <br>
+  <!--Schema Code-->
+  <h3 class = 'center'>Schema</h3>
+  <div style="background: #000000; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+    <br>
+    <pre style="margin: 0; line-height: 125%"><span style="color: #cd0000">ActiveRecord</span><span style="color: #cccccc">:</span><span style="color: #cd0000">:Schema</span><span style="color: #3399cc">.</span><span style="color: #cccccc">define(</span><span style="color: #cd0000">version</span><span style="color: #cccccc">:</span> <span style="color: #cd00cd">2020_03_20_053309</span><span style="color: #cccccc">)</span> <span style="color: #cdcd00">do</span>
+  <span style="color: #cccccc">create_table</span> <span style="color: #cd0000">&#39;cars&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">force</span><span style="color: #cccccc">:</span> <span style="color: #cd0000">:cascade</span> <span style="color: #cdcd00">do</span> <span style="color: #3399cc">|</span><span style="color: #cccccc">t</span><span style="color: #3399cc">|</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">string</span> <span style="color: #cd0000">&#39;model&#39;</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">integer</span> <span style="color: #cd0000">&#39;year&#39;</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">string</span> <span style="color: #cd0000">&#39;standard_specs&#39;</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">string</span> <span style="color: #cd0000">&#39;car_options&#39;</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">string</span> <span style="color: #cd0000">&#39;transmission&#39;</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">integer</span> <span style="color: #cd0000">&#39;user_id&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">null</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">false</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">integer</span> <span style="color: #cd0000">&#39;manufacturer_id&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">null</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">false</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">datetime</span> <span style="color: #cd0000">&#39;created_at&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">precision</span><span style="color: #cccccc">:</span> <span style="color: #cd00cd">6</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">null</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">false</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">datetime</span> <span style="color: #cd0000">&#39;updated_at&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">precision</span><span style="color: #cccccc">:</span> <span style="color: #cd00cd">6</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">null</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">false</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">index</span> <span style="color: #cd0000">%w[manufacturer_id]</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">name</span><span style="color: #cccccc">:</span> <span style="color: #cd0000">&#39;index_cars_on_manufacturer_id&#39;</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">index</span> <span style="color: #cd0000">%w[user_id]</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">name</span><span style="color: #cccccc">:</span> <span style="color: #cd0000">&#39;index_cars_on_user_id&#39;</span>
+  <span style="color: #cdcd00">end</span>
 
-<span style="color: #6ab825; font-weight: bold">class</span> <span style="color: #447fcf; text-decoration: underline">CarsController</span> <span style="color: #d0d0d0">&lt;</span> <span style="color: #40ffff">ApplicationController</span>
-  <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">new</span>
-    <span style="color: #d0d0d0">redirect_if_try_to_spoof</span>
-    <span style="color: #40ffff">@car</span> <span style="color: #d0d0d0">=</span> <span style="color: #40ffff">Car</span><span style="color: #d0d0d0">.new</span>
-  <span style="color: #6ab825; font-weight: bold">end</span>
+  <span style="color: #cccccc">create_table</span> <span style="color: #cd0000">&#39;cars_dealerships&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">id</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">false</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">force</span><span style="color: #cccccc">:</span> <span style="color: #cd0000">:cascade</span> <span style="color: #cdcd00">do</span> <span style="color: #3399cc">|</span><span style="color: #cccccc">t</span><span style="color: #3399cc">|</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">integer</span> <span style="color: #cd0000">&#39;dealership_id&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">null</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">false</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">integer</span> <span style="color: #cd0000">&#39;car_id&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">null</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">false</span>
+  <span style="color: #cdcd00">end</span>
 
-  <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">create</span>
-    <span style="color: #d0d0d0">redirect_if_try_to_spoof</span>
-    <span style="color: #40ffff">@car</span> <span style="color: #d0d0d0">=</span> <span style="color: #40ffff">Car</span><span style="color: #d0d0d0">.new(car_params)</span>
-    <span style="color: #40ffff">@car</span><span style="color: #d0d0d0">.save</span> <span style="color: #d0d0d0">?</span> <span style="color: #d0d0d0">(redirect_to</span> <span style="color: #d0d0d0">user_car_path(current_user,</span> <span style="color: #40ffff">@car</span><span style="color: #d0d0d0">))</span> <span style="color: #d0d0d0">:</span> <span style="color: #d0d0d0">(render</span> <span style="color: #ed9d13">:new</span><span style="color: #d0d0d0">)</span>
-  <span style="color: #6ab825; font-weight: bold">end</span>
+  <span style="color: #cccccc">create_table</span> <span style="color: #cd0000">&#39;dealerships&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">force</span><span style="color: #cccccc">:</span> <span style="color: #cd0000">:cascade</span> <span style="color: #cdcd00">do</span> <span style="color: #3399cc">|</span><span style="color: #cccccc">t</span><span style="color: #3399cc">|</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">string</span> <span style="color: #cd0000">&#39;name&#39;</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">string</span> <span style="color: #cd0000">&#39;location&#39;</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">datetime</span> <span style="color: #cd0000">&#39;created_at&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">precision</span><span style="color: #cccccc">:</span> <span style="color: #cd00cd">6</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">null</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">false</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">datetime</span> <span style="color: #cd0000">&#39;updated_at&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">precision</span><span style="color: #cccccc">:</span> <span style="color: #cd00cd">6</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">null</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">false</span>
+  <span style="color: #cdcd00">end</span>
 
-  <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">index</span>
-    <span style="color: #d0d0d0">redirect_if_try_to_spoof</span>
-  <span style="color: #6ab825; font-weight: bold">end</span>
+  <span style="color: #cccccc">create_table</span> <span style="color: #cd0000">&#39;manufacturers&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">force</span><span style="color: #cccccc">:</span> <span style="color: #cd0000">:cascade</span> <span style="color: #cdcd00">do</span> <span style="color: #3399cc">|</span><span style="color: #cccccc">t</span><span style="color: #3399cc">|</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">string</span> <span style="color: #cd0000">&#39;ceo&#39;</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">integer</span> <span style="color: #cd0000">&#39;revenue&#39;</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">string</span> <span style="color: #cd0000">&#39;name&#39;</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">datetime</span> <span style="color: #cd0000">&#39;created_at&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">precision</span><span style="color: #cccccc">:</span> <span style="color: #cd00cd">6</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">null</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">false</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">datetime</span> <span style="color: #cd0000">&#39;updated_at&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">precision</span><span style="color: #cccccc">:</span> <span style="color: #cd00cd">6</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">null</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">false</span>
+  <span style="color: #cdcd00">end</span>
 
-  <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">show</span>
-    <span style="color: #d0d0d0">redirect_if_try_to_spoof</span>
-    <span style="color: #d0d0d0">find_car_or_redirect</span>
-  <span style="color: #6ab825; font-weight: bold">end</span>
+  <span style="color: #cccccc">create_table</span> <span style="color: #cd0000">&#39;sessions&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">force</span><span style="color: #cccccc">:</span> <span style="color: #cd0000">:cascade</span> <span style="color: #cdcd00">do</span> <span style="color: #3399cc">|</span><span style="color: #cccccc">t</span><span style="color: #3399cc">|</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">string</span> <span style="color: #cd0000">&#39;session_id&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">null</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">false</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">text</span> <span style="color: #cd0000">&#39;data&#39;</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">datetime</span> <span style="color: #cd0000">&#39;created_at&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">precision</span><span style="color: #cccccc">:</span> <span style="color: #cd00cd">6</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">null</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">false</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">datetime</span> <span style="color: #cd0000">&#39;updated_at&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">precision</span><span style="color: #cccccc">:</span> <span style="color: #cd00cd">6</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">null</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">false</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">index</span> <span style="color: #cd0000">%w[session_id]</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">name</span><span style="color: #cccccc">:</span> <span style="color: #cd0000">&#39;index_sessions_on_session_id&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">unique</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">true</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">index</span> <span style="color: #cd0000">%w[updated_at]</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">name</span><span style="color: #cccccc">:</span> <span style="color: #cd0000">&#39;index_sessions_on_updated_at&#39;</span>
+  <span style="color: #cdcd00">end</span>
 
-  <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">edit</span>
-    <span style="color: #d0d0d0">redirect_if_try_to_spoof</span>
-    <span style="color: #d0d0d0">find_car_or_redirect</span>
-  <span style="color: #6ab825; font-weight: bold">end</span>
+  <span style="color: #cccccc">create_table</span> <span style="color: #cd0000">&#39;users&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">force</span><span style="color: #cccccc">:</span> <span style="color: #cd0000">:cascade</span> <span style="color: #cdcd00">do</span> <span style="color: #3399cc">|</span><span style="color: #cccccc">t</span><span style="color: #3399cc">|</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">string</span> <span style="color: #cd0000">&#39;email&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">default</span><span style="color: #cccccc">:</span> <span style="color: #cd0000">&#39;&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">null</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">false</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">string</span> <span style="color: #cd0000">&#39;encrypted_password&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">default</span><span style="color: #cccccc">:</span> <span style="color: #cd0000">&#39;&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">null</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">false</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">string</span> <span style="color: #cd0000">&#39;reset_password_token&#39;</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">datetime</span> <span style="color: #cd0000">&#39;reset_password_sent_at&#39;</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">datetime</span> <span style="color: #cd0000">&#39;remember_created_at&#39;</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">string</span> <span style="color: #cd0000">&#39;username&#39;</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">datetime</span> <span style="color: #cd0000">&#39;created_at&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">precision</span><span style="color: #cccccc">:</span> <span style="color: #cd00cd">6</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">null</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">false</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">datetime</span> <span style="color: #cd0000">&#39;updated_at&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">precision</span><span style="color: #cccccc">:</span> <span style="color: #cd00cd">6</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">null</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">false</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">index</span> <span style="color: #cd0000">%w[email]</span><span style="color: #cccccc">,</span> <span style="color: #cd00cd">name</span><span style="color: #cccccc">:</span> <span style="color: #cd0000">&#39;index_users_on_email&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">unique</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">true</span>
+    <span style="color: #cccccc">t</span><span style="color: #3399cc">.</span><span style="color: #cccccc">index</span> <span style="color: #cd0000">%w[reset_password_token]</span><span style="color: #cccccc">,</span>
+            <span style="color: #cd00cd">name</span><span style="color: #cccccc">:</span> <span style="color: #cd0000">&#39;index_users_on_reset_password_token&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">unique</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">true</span>
+  <span style="color: #cdcd00">end</span>
 
-  <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">update</span>
-    <span style="color: #d0d0d0">redirect_if_try_to_spoof</span>
-    <span style="color: #d0d0d0">find_car_or_redirect</span>
-    <span style="color: #40ffff">@car</span><span style="color: #d0d0d0">.update(car_params)</span>
-    <span style="color: #40ffff">@car</span><span style="color: #d0d0d0">.errors.any?</span> <span style="color: #d0d0d0">?</span> <span style="color: #d0d0d0">(render</span> <span style="color: #ed9d13">:edit</span><span style="color: #d0d0d0">)</span> <span style="color: #d0d0d0">:</span> <span style="color: #d0d0d0">(redirect_to</span> <span style="color: #d0d0d0">[current_user,</span> <span style="color: #40ffff">@car</span><span style="color: #d0d0d0">])</span>
-  <span style="color: #6ab825; font-weight: bold">end</span>
-
-  <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">destroy</span>
-    <span style="color: #d0d0d0">redirect_if_try_to_spoof</span>
-    <span style="color: #d0d0d0">find_car_or_redirect</span>
-    <span style="color: #40ffff">@car</span><span style="color: #d0d0d0">.destroy</span>
-    <span style="color: #d0d0d0">redirect_to</span> <span style="color: #d0d0d0">current_user</span>
-  <span style="color: #6ab825; font-weight: bold">end</span>
-
-  <span style="color: #6ab825">private</span>
-
-  <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">find_car_or_redirect</span>
-    <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #6ab825; font-weight: bold">unless</span> <span style="color: #d0d0d0">user_signed_in?</span>
-
-    <span style="color: #40ffff">@car</span> <span style="color: #d0d0d0">=</span> <span style="color: #d0d0d0">current_user.cars.find_by(</span><span style="color: #24909d">id</span><span style="color: #d0d0d0">:</span> <span style="color: #d0d0d0">params[</span><span style="color: #ed9d13">:id</span><span style="color: #d0d0d0">])</span>
-    <span style="color: #6ab825; font-weight: bold">return</span> <span style="color: #6ab825; font-weight: bold">if</span> <span style="color: #40ffff">@car</span>
-
-    <span style="color: #d0d0d0">flash[</span><span style="color: #ed9d13">:notice</span><span style="color: #d0d0d0">]</span> <span style="color: #d0d0d0">=</span> <span style="color: #ed9d13">&#39;You do not have permission to do that&#39;</span>
-    <span style="color: #d0d0d0">redirect_to</span> <span style="color: #d0d0d0">current_user</span>
-  <span style="color: #6ab825; font-weight: bold">end</span>
-
-  <span style="color: #6ab825; font-weight: bold">def</span> <span style="color: #447fcf">car_params</span>
-    <span style="color: #d0d0d0">params.require(</span><span style="color: #ed9d13">:car</span><span style="color: #d0d0d0">).permit(</span><span style="color: #ed9d13">:model</span><span style="color: #d0d0d0">,</span> <span style="color: #ed9d13">:manufacturer_id</span><span style="color: #d0d0d0">,</span> <span style="color: #ed9d13">:year</span><span style="color: #d0d0d0">,</span> <span style="color: #ed9d13">:user_id</span><span style="color: #d0d0d0">)</span>
-  <span style="color: #6ab825; font-weight: bold">end</span>
-<span style="color: #6ab825; font-weight: bold">end</span>
-</pre>
+  <span style="color: #cccccc">add_foreign_key</span> <span style="color: #cd0000">&#39;cars&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">&#39;manufacturers&#39;</span>
+  <span style="color: #cccccc">add_foreign_key</span> <span style="color: #cd0000">&#39;cars&#39;</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">&#39;users&#39;</span>
+<span style="color: #cdcd00">end</span>
 </div>
+
+<br>
+<h3 class = 'center'>Conrtoller</h3>
+<div style="background: #000000; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #cdcd00">class</span> <span style="color: #00cdcd">CarsController</span> <span style="color: #3399cc">&lt;</span> <span style="color: #cccccc">ApplicationController</span>
+  <span style="color: #cdcd00">def</span> <span style="color: #cccccc">new</span>
+    <span style="color: #cccccc">redirect_if_try_to_spoof</span>
+    <span style="color: #00cdcd">@car</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">Car</span><span style="color: #3399cc">.</span><span style="color: #cccccc">new</span>
+  <span style="color: #cdcd00">end</span>
+
+  <span style="color: #cdcd00">def</span> <span style="color: #cccccc">create</span>
+    <span style="color: #cccccc">redirect_if_try_to_spoof</span>
+    <span style="color: #00cdcd">@car</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">Car</span><span style="color: #3399cc">.</span><span style="color: #cccccc">new(car_params)</span>
+    <span style="color: #00cdcd">@car</span><span style="color: #3399cc">.</span><span style="color: #cccccc">save</span> <span style="color: #cccccc">?</span> <span style="color: #cccccc">(redirect_to</span> <span style="color: #cccccc">user_car_path(current_user,</span> <span style="color: #00cdcd">@car</span><span style="color: #cccccc">))</span> <span style="color: #cccccc">:</span> <span style="color: #cccccc">(render</span> <span style="color: #cd0000">:new</span><span style="color: #cccccc">)</span>
+  <span style="color: #cdcd00">end</span>
+
+  <span style="color: #cdcd00">def</span> <span style="color: #cccccc">index</span>
+    <span style="color: #cccccc">redirect_if_try_to_spoof</span>
+  <span style="color: #cdcd00">end</span>
+
+  <span style="color: #cdcd00">def</span> <span style="color: #cccccc">show</span>
+    <span style="color: #cccccc">redirect_if_try_to_spoof</span>
+    <span style="color: #cccccc">find_car_or_redirect</span>
+  <span style="color: #cdcd00">end</span>
+
+  <span style="color: #cdcd00">def</span> <span style="color: #cccccc">edit</span>
+    <span style="color: #cccccc">redirect_if_try_to_spoof</span>
+    <span style="color: #cccccc">find_car_or_redirect</span>
+  <span style="color: #cdcd00">end</span>
+
+  <span style="color: #cdcd00">def</span> <span style="color: #cccccc">update</span>
+    <span style="color: #cccccc">redirect_if_try_to_spoof</span>
+    <span style="color: #cccccc">find_car_or_redirect</span>
+    <span style="color: #00cdcd">@car</span><span style="color: #3399cc">.</span><span style="color: #cccccc">update(car_params)</span>
+    <span style="color: #00cdcd">@car</span><span style="color: #3399cc">.</span><span style="color: #cccccc">errors</span><span style="color: #3399cc">.</span><span style="color: #cccccc">any?</span> <span style="color: #cccccc">?</span> <span style="color: #cccccc">(render</span> <span style="color: #cd0000">:edit</span><span style="color: #cccccc">)</span> <span style="color: #cccccc">:</span> <span style="color: #cccccc">(redirect_to</span> <span style="color: #3399cc">[</span><span style="color: #cccccc">current_user,</span> <span style="color: #00cdcd">@car</span><span style="color: #3399cc">]</span><span style="color: #cccccc">)</span>
+  <span style="color: #cdcd00">end</span>
+
+  <span style="color: #cdcd00">def</span> <span style="color: #cccccc">destroy</span>
+    <span style="color: #cccccc">redirect_if_try_to_spoof</span>
+    <span style="color: #cccccc">find_car_or_redirect</span>
+    <span style="color: #00cdcd">@car</span><span style="color: #3399cc">.</span><span style="color: #cccccc">destroy</span>
+    <span style="color: #cccccc">redirect_to</span> <span style="color: #cccccc">current_user</span>
+  <span style="color: #cdcd00">end</span>
+
+  <span style="color: #cdcd00">private</span>
+
+  <span style="color: #cdcd00">def</span> <span style="color: #cccccc">find_car_or_redirect</span>
+    <span style="color: #cdcd00">return</span> <span style="color: #cdcd00">unless</span> <span style="color: #cccccc">user_signed_in?</span>
+
+    <span style="color: #00cdcd">@car</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">current_user</span><span style="color: #3399cc">.</span><span style="color: #cccccc">cars</span><span style="color: #3399cc">.</span><span style="color: #cccccc">find_by(</span><span style="color: #cd00cd">id</span><span style="color: #cccccc">:</span> <span style="color: #cccccc">params</span><span style="color: #3399cc">[</span><span style="color: #cd0000">:id</span><span style="color: #3399cc">]</span><span style="color: #cccccc">)</span>
+    <span style="color: #cdcd00">return</span> <span style="color: #cdcd00">if</span> <span style="color: #00cdcd">@car</span>
+
+    <span style="color: #cccccc">flash</span><span style="color: #3399cc">[</span><span style="color: #cd0000">:notice</span><span style="color: #3399cc">]</span> <span style="color: #3399cc">=</span> <span style="color: #cd0000">&#39;You do not have permission to do that&#39;</span>
+    <span style="color: #cccccc">redirect_to</span> <span style="color: #cccccc">current_user</span>
+  <span style="color: #cdcd00">end</span>
+
+  <span style="color: #cdcd00">def</span> <span style="color: #cccccc">car_params</span>
+    <span style="color: #cccccc">params</span><span style="color: #3399cc">.</span><span style="color: #cccccc">require(</span><span style="color: #cd0000">:car</span><span style="color: #cccccc">)</span><span style="color: #3399cc">.</span><span style="color: #cccccc">permit(</span><span style="color: #cd0000">:model</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">:manufacturer_id</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">:year</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">:user_id</span><span style="color: #cccccc">)</span>
+  <span style="color: #cdcd00">end</span>
+<span style="color: #cdcd00">end</span>
+</pre>
+  </div>
+  <br>
+  <h3 class = 'center'>Models</h3>
+  <div style="background: #000000; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+    <pre style="margin: 0; line-height: 125%"><span style="color: #cdcd00">class</span> <span style="color: #00cdcd">Car</span> <span style="color: #3399cc">&lt;</span> <span style="color: #cccccc">ApplicationRecord</span>
+  <span style="color: #cccccc">belongs_to</span> <span style="color: #cd0000">:user</span>
+  <span style="color: #cccccc">belongs_to</span> <span style="color: #cd0000">:manufacturer</span>
+  <span style="color: #cccccc">has_and_belongs_to_many</span> <span style="color: #cd0000">:dealerships</span>
+  <span style="color: #cccccc">validates</span> <span style="color: #cd0000">:model</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">presence</span><span style="color: #cccccc">:</span> <span style="color: #cd0000">:true</span>
+  <span style="color: #cccccc">scope</span> <span style="color: #cd0000">:toyota</span><span style="color: #cccccc">,</span>
+        <span style="color: #3399cc">-&gt;</span> <span style="color: #cccccc">{</span> <span style="color: #cccccc">joins(</span><span style="color: #cd0000">:manufacturer</span><span style="color: #cccccc">)</span><span style="color: #3399cc">.</span><span style="color: #cccccc">where(</span><span style="color: #cd0000">manufacturers</span><span style="color: #cccccc">:</span> <span style="color: #cccccc">{</span> <span style="color: #cd0000">&#39;name&#39;</span> <span style="color: #3399cc">=&gt;</span> <span style="color: #cd0000">&#39;Toyota&#39;</span> <span style="color: #cccccc">})</span> <span style="color: #cccccc">}</span>
+  <span style="color: #cccccc">scope</span> <span style="color: #cd0000">:honda</span><span style="color: #cccccc">,</span>
+        <span style="color: #3399cc">-&gt;</span> <span style="color: #cccccc">{</span> <span style="color: #cccccc">joins(</span><span style="color: #cd0000">:manufacturer</span><span style="color: #cccccc">)</span><span style="color: #3399cc">.</span><span style="color: #cccccc">where(</span><span style="color: #cd0000">manufacturers</span><span style="color: #cccccc">:</span> <span style="color: #cccccc">{</span> <span style="color: #cd0000">&#39;name&#39;</span> <span style="color: #3399cc">=&gt;</span> <span style="color: #cd0000">&#39;Honda&#39;</span> <span style="color: #cccccc">})</span> <span style="color: #cccccc">}</span>
+  <span style="color: #000080"># Ex:- scope :active, -&gt;</span>
+<span style="color: #cdcd00">end</span>
+
+<span style="color: #cdcd00">class</span> <span style="color: #00cdcd">Dealership</span> <span style="color: #3399cc">&lt;</span> <span style="color: #cccccc">ApplicationRecord</span>
+  <span style="color: #cccccc">has_and_belongs_to_many</span> <span style="color: #cd0000">:cars</span>
+  <span style="color: #cccccc">has_many</span> <span style="color: #cd0000">:users</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">through</span><span style="color: #cccccc">:</span> <span style="color: #cd0000">:cars</span>
+  <span style="color: #cccccc">has_many</span> <span style="color: #cd0000">:manufacturers</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">through</span><span style="color: #cccccc">:</span> <span style="color: #cd0000">:cars</span>
+  <span style="color: #cccccc">validates</span> <span style="color: #cd0000">:name</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">presence</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">true</span>
+  <span style="color: #cccccc">validates</span> <span style="color: #cd0000">:location</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">presence</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">true</span>
+<span style="color: #cdcd00">end</span>
+
+<span style="color: #cdcd00">class</span> <span style="color: #00cdcd">Manufacturer</span> <span style="color: #3399cc">&lt;</span> <span style="color: #cccccc">ApplicationRecord</span>
+  <span style="color: #cccccc">has_many</span> <span style="color: #cd0000">:cars</span>
+  <span style="color: #cccccc">has_many</span> <span style="color: #cd0000">:users</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">through</span><span style="color: #cccccc">:</span> <span style="color: #cd0000">:cars</span>
+  <span style="color: #cccccc">has_many</span> <span style="color: #cd0000">:dealerships</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">through</span><span style="color: #cccccc">:</span> <span style="color: #cd0000">:cars</span>
+  <span style="color: #cccccc">validates</span> <span style="color: #cd0000">:name</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">presence</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">true</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">uniqueness</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">true</span>
+  <span style="color: #cccccc">validates</span> <span style="color: #cd0000">:ceo</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">presence</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">true</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">uniqueness</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">true</span>
+<span style="color: #cdcd00">end</span>
+
+<span style="color: #cdcd00">class</span> <span style="color: #00cdcd">User</span> <span style="color: #3399cc">&lt;</span> <span style="color: #cccccc">ApplicationRecord</span>
+  <span style="color: #cccccc">devise</span> <span style="color: #cd0000">:database_authenticatable</span><span style="color: #cccccc">,</span>
+         <span style="color: #cd0000">:registerable</span><span style="color: #cccccc">,</span>
+         <span style="color: #cd0000">:validatable</span><span style="color: #cccccc">,</span>
+         <span style="color: #cd0000">:omniauthable</span><span style="color: #cccccc">,</span>
+         <span style="color: #cccccc">omniauth_providers:</span> <span style="color: #3399cc">%</span><span style="color: #cccccc">i</span><span style="color: #3399cc">[</span><span style="color: #cccccc">google_oauth2</span><span style="color: #3399cc">]</span>
+
+  <span style="color: #cccccc">has_many</span> <span style="color: #cd0000">:cars</span>
+  <span style="color: #cccccc">has_many</span> <span style="color: #cd0000">:manufacturers</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">through</span><span style="color: #cccccc">:</span> <span style="color: #cd0000">:cars</span>
+  <span style="color: #cccccc">has_many</span> <span style="color: #cd0000">:dealerships</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">through</span><span style="color: #cccccc">:</span> <span style="color: #cd0000">:cars</span>
+  <span style="color: #cccccc">validates</span> <span style="color: #cd0000">:username</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">presence</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">true</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">uniqueness</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">true</span>
+  <span style="color: #cccccc">validates</span> <span style="color: #cd0000">:email</span><span style="color: #cccccc">,</span> <span style="color: #cd0000">uniqueness</span><span style="color: #cccccc">:</span> <span style="color: #cdcd00">true</span>
+
+  <span style="color: #cdcd00">def</span> <span style="color: #00cdcd">self</span><span style="color: #3399cc">.</span><span style="color: #cccccc">from_omniauth(access_token)</span>
+    <span style="color: #cccccc">data</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">access_token</span><span style="color: #3399cc">.</span><span style="color: #cccccc">info</span>
+    <span style="color: #cccccc">user</span> <span style="color: #3399cc">=</span>
+      <span style="color: #cccccc">User</span><span style="color: #3399cc">.</span><span style="color: #cccccc">find_or_create_by(</span><span style="color: #cd0000">email</span><span style="color: #cccccc">:</span> <span style="color: #cccccc">data</span><span style="color: #3399cc">[</span><span style="color: #cd0000">&#39;email&#39;</span><span style="color: #3399cc">]</span><span style="color: #cccccc">)</span> <span style="color: #cdcd00">do</span> <span style="color: #3399cc">|</span><span style="color: #cccccc">u</span><span style="color: #3399cc">|</span>
+        <span style="color: #cccccc">u</span><span style="color: #3399cc">.</span><span style="color: #cccccc">email</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">data</span><span style="color: #3399cc">[</span><span style="color: #cd0000">&#39;email&#39;</span><span style="color: #3399cc">]</span>
+        <span style="color: #cccccc">u</span><span style="color: #3399cc">.</span><span style="color: #cccccc">username</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">data</span><span style="color: #3399cc">[</span><span style="color: #cd0000">&#39;name&#39;</span><span style="color: #3399cc">]</span>
+        <span style="color: #cccccc">u</span><span style="color: #3399cc">.</span><span style="color: #cccccc">password</span> <span style="color: #3399cc">=</span> <span style="color: #cccccc">SecureRandom</span><span style="color: #3399cc">.</span><span style="color: #cccccc">hex</span>
+      <span style="color: #cdcd00">end</span>
+  <span style="color: #cdcd00">end</span>
+<span style="color: #cdcd00">end</span>
+</pre>
+  </div>
