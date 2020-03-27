@@ -9,6 +9,12 @@ class DealershipsController < ApplicationController
     check_if_authorized
   end
 
+  def filter
+    redirect_if_not_logged_in
+    @dealerships = Dealership.filter_by(filter_params[:dealership])
+    render :filter
+  end
+
   def create
     check_if_authorized
     @deal = @car.dealerships.new(dealer_params)
@@ -26,6 +32,10 @@ class DealershipsController < ApplicationController
 
   def dealer_params
     params.require(:dealership).permit(:name, :location)
+  end
+
+  def filter_params
+    params.require(:car).permit(:dealership)
   end
 
   def check_if_authorized

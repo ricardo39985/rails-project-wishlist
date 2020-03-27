@@ -4,10 +4,15 @@ class UsersController < ApplicationController
   def show
     redirect_if_try_to_spoof
     give_new_user_some_cars
+    return user_cars_path(current_user)
   end
 
   def index
-    user_signed_in? ? (redirect_to current_user) : (redirect_to new_user_registration_path)
+    if user_signed_in?
+      (redirect_to current_user)
+    else
+      (redirect_to new_user_registration_path)
+    end
   end
 
   private
@@ -24,7 +29,8 @@ class UsersController < ApplicationController
         new_car.standard_specs = Faker::Vehicle.standard_specs.join(' ')
         new_car.dealerships << Dealership.order('RANDOM()').first
         new_car.manufacturer = Manufacturer.order('RANDOM()').first
-        new_car.model = Faker::Vehicle.model(make_of_model: new_car.manufacturer.name)
+        new_car.model =
+          Faker::Vehicle.model(make_of_model: new_car.manufacturer.name)
         new_car.year = rand(2000..2022)
         new_car.save
       end
@@ -34,9 +40,9 @@ class UsersController < ApplicationController
 
   def new_dealerships
     20.times do
-      Dealership.find_or_create_by(name: Faker::Company.name.to_s + ' ' + Faker::Company.suffix.to_s) do |d|
-        d.location = Faker::Address.full_address
-      end
+      Dealership.find_or_create_by(
+        name: Faker::Company.name.to_s + ' ' + Faker::Company.suffix.to_s
+      ) { |d| d.location = Faker::Address.full_address }
     end
   end
 

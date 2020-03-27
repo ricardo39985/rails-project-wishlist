@@ -18,8 +18,9 @@ class ApplicationController < ActionController::Base
   def redirect_if_try_to_spoof
     redirect_if_not_logged_in
     if current_user
-      redirect_to user_cars_path(current_user) unless
-      current_user.id == params[:user_id].to_i
+      unless current_user.id == params[:user_id].to_i
+        redirect_to user_cars_path(current_user)
+      end
     end
   end
 end
