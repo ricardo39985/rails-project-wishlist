@@ -7,33 +7,33 @@
       <div class="col s12 m8">
         <div class= "center-align">
           <% if user_signed_in? %>
-              <%= link_to destroy_user_session_path, method: :delete, class: "N/A transparent lighten-1 hoverable waves-effect waves-light btn center" do %>
+              <%= link_to destroy_user_session_path, method: :delete, class: "N/A transparent  hoverable waves-effect waves-light btn-small center" do %>
                 <i class="fas fa-sign-out-alt"></i>  Log out
               <% end %>
-              <%= link_to  new_user_car_path(current_user),class: "N/A transparent lighten-1 hoverable waves-effect waves-light btn center" do %>
+              <%= link_to  new_user_car_path(current_user),class: "N/A transparent lighten-1 hoverable waves-effect waves-light btn-small center" do %>
                 <i class="fas fa-plus"></i> Add Car
               <% end %>
-              <%= link_to user_cars_path(current_user), method: :get, class: "N/A transparent lighten-1 hoverable waves-effect waves-light btn center" do %>
+              <%= link_to user_cars_path(current_user), method: :get, class: "N/A transparent lighten-1 hoverable waves-effect waves-light btn-small center" do %>
                 <i class="fas fa-car"></i> All Cars
               <% end %>              
           <% else %>
-              <%= link_to new_user_session_path,class: "N/A transparent hoverable waves-effect waves-light btn center" do %>
+              <%= link_to new_user_session_path,class: "N/A transparent hoverable waves-effect waves-light btn-small center" do %>
                  <i class="fas fa-sign-in-alt"></i>  Login
               <% end %>
-              <%= link_to  new_user_registration_path,class: "N/A transparent lighten-1 hoverable waves-effect waves-light btn center" do %>
+              <%= link_to  new_user_registration_path,class: "N/A transparent lighten-1 hoverable waves-effect waves-light btn-small center" do %>
                  <i class="fas fa-user-plus"></i>  Sign Up
               <% end %>
-              <%=link_to user_google_oauth2_omniauth_authorize_path, class: "N/A transparent lighten-1 hoverable waves-effect waves-light btn center" do %>
+              <%=link_to user_google_oauth2_omniauth_authorize_path, class: "N/A transparent lighten-1 hoverable waves-effect waves-light btn-small center" do %>
                 <i class="fab fa-google"></i>  Sign in with Google
               <% end %>
           <% end %> 
-          <%= link_to 'https://github.com/ricardo39985/rails-project-wishlist', target: :_blank, class: "N/A transparent lighten-1 hoverable waves-effect waves-light btn center" do %>
+          <%= link_to 'https://github.com/ricardo39985/rails-project-wishlist', target: :_blank, class: "N/A transparent lighten-1 hoverable waves-effect waves-light btn-small center" do %>
              <i class="fab fa-github"></i>  View on Github
           <% end %>
-          <%= link_to 'https://ricardo39985.github.io/rails_project_blog', target: :_blank, class: "N/A transparent lighten-1 hoverable waves-effect waves-light btn center" do %>
+          <%= link_to 'https://ricardo39985.github.io/rails_project_blog', target: :_blank, class: "N/A transparent lighten-1 hoverable waves-effect waves-light btn-small center" do %>
              <i class="fas fa-rss"></i>  Blog
           <% end %>
-          <%= link_to 'https://youtu.be/yXBjwxUChzY', target: :_blank, class: "N/A transparent lighten-1 hoverable waves-effect waves-light btn center" do %>
+          <%= link_to 'https://youtu.be/yXBjwxUChzY', target: :_blank, class: "N/A transparent lighten-1 hoverable waves-effect waves-light btn-small center" do %>
              <i class="fab fa-youtube"></i>  View Demo on Youtube
           <% end %>
         </div>
