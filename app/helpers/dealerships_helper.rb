@@ -1,2 +1,1 @@
-module DealershipsHelper
-end
+module DealershipsHelper; end

@@ -3,8 +3,11 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,  :validatable,
-         :omniauthable, omniauth_providers: [:google_oauth2]
+  devise :database_authenticatable,
+         :registerable,
+         :validatable,
+         :omniauthable,
+         omniauth_providers: %i[google_oauth2]
 
   has_many :cars
   has_many :manufacturers, through: :cars
@@ -14,10 +17,11 @@ class User < ApplicationRecord
 
   def self.from_omniauth(access_token)
     data = access_token.info
-    user = User.find_or_create_by(email: data['email']) do |u|
-      u.email = data['email']
-      u.username = data['name']
-      u.password = SecureRandom.hex
-    end
+    user =
+      User.find_or_create_by(email: data['email']) do |u|
+        u.email = data['email']
+        u.username = data['name']
+        u.password = SecureRandom.hex
+      end
   end
 end

@@ -1,2 +1,1 @@
-module CarsHelper
-end
+module CarsHelper; end

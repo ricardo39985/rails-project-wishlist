@@ -30,6 +30,7 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'faker'
 gem 'materialize-sass'
+gem 'prettier'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

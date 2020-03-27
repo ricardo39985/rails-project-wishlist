@@ -6,4 +6,5 @@ class Manufacturer < ApplicationRecord
   has_many :dealerships, through: :cars
   validates :name, presence: true, uniqueness: true
   validates :ceo, presence: true, uniqueness: true
+
 end

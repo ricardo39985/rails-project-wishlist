@@ -1,2 +1,1 @@
-module ManufacturersHelper
-end
+module ManufacturersHelper; end

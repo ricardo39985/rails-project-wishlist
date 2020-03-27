@@ -23,9 +23,9 @@ end
 
 # create 20 dealerships
 20.times do
-  Dealership.find_or_create_by(name: Faker::Company.name.to_s + ' ' + Faker::Company.suffix.to_s) do |d|
-    d.location = Faker::Address.full_address
-  end
+  Dealership.find_or_create_by(
+    name: Faker::Company.name.to_s + ' ' + Faker::Company.suffix.to_s
+  ) { |d| d.location = Faker::Address.full_address }
 end
 #create 500 new cars
 20.times do
